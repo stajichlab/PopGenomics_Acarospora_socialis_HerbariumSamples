@@ -1,7 +1,7 @@
 #!/bin/bash
-#SBATCH -N 1 -n 16 --mem 32gb --out logs/bwa.%a.log --time 8:00:00
+#SBATCH -N 1 -n 16 --mem 32gb --out logs/bwa.%a.log --time 8:00:00 -p batch,intel
 module load bwa
-module load samtools/1.12
+module load samtools/1.14
 module load picard
 module load gatk/4
 module load java/13

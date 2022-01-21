@@ -1,5 +1,5 @@
 #!/usr/bin/bash
-#SBATCH -p batch,intel -N 1 -n 8 --mem 32gb --out logs/make_gvcf.%a.log --time 48:00:00
+#SBATCH -p intel -N 1 -n 16 --mem 32gb --out logs/make_gvcf_diploid.%a.log --time 48:00:00
 
 module load picard
 module load java/13
@@ -42,7 +42,7 @@ do
   # BEGIN THIS PART IS PROJECT SPECIFIC LIKELY
   # END THIS PART IS PROJECT SPECIFIC LIKELY
   echo "STRAIN is $STRAIN"
-  GVCF=$GVCFFOLDER/$STRAIN.g.vcf
+  GVCF=$GVCFFOLDER.diploid/$STRAIN.g.vcf
   ALNFILE=$ALNFOLDER/$STRAIN.$HTCEXT
   if [ -s $GVCF.gz ]; then
     echo "Skipping $STRAIN - Already called $STRAIN.g.vcf.gz"
@@ -50,7 +50,7 @@ do
   fi
   if [[ ! -f $GVCF || $ALNFILE -nt $GVCF ]]; then
       time gatk --java-options -Xmx${MEM} HaplotypeCaller \
-   	  --emit-ref-confidence GVCF --sample-ploidy 1 \
+   	  --emit-ref-confidence GVCF --sample-ploidy 2 \
    	  --input $ALNFILE --reference $REFGENOME \
    	  --output $GVCF --native-pair-hmm-threads $CPU \
 	     -G StandardAnnotation -G AS_StandardAnnotation -G StandardHCAnnotation
