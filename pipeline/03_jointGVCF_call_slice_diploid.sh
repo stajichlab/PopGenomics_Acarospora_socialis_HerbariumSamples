@@ -62,8 +62,9 @@ fi
 if [ -z $SLICEVCF ]; then
 	SLICEVCF=vcf_slice
 fi
+SLICEVCF=$SLICEVCF.diploid
 mkdir -p $SLICEVCF
-for POPNAME in $(yq eval '.Populations | keys' $POPYAML | perl -p -e 's/^\s*\-\s*//')
+for POPNAME in $(yq eval '.Populations | keys' $POPYAML | perl -p -e 's/^\s*\-\s*//' | grep Fresh)
 do
 	FILES=$(yq eval '.Populations.'$POPNAME'[]' $POPYAML | perl -p -e "s/(\S+)/-V $GVCFFOLDER.diploid\/\$1.g.vcf.gz/g"  )
 	INTERVALS=$(cut -f1 $REFGENOME.fai  | sed -n "${NSTART},${NEND}p" | perl -p -e 's/(\S+)\n/--intervals $1 /g')

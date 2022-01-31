@@ -15,17 +15,6 @@ module load workspace/scratch
 
 source config.txt
 
-#declare -x TEMPDIR=$TEMP/$USER/$$
-
-#cleanup() {
-	#echo "rm temp is: $TEMPDIR"
-#	rm -rf $TEMPDIR
-#}#
-
-# Set trap to ensure cleanupis stopped
-#trap "cleanup; rm -rf $TEMPDIR; exit" SIGHUP SIGINT SIGTERM EXIT
-
-GVCF_INTERVAL=1
 N=${SLURM_ARRAY_TASK_ID}
 
 if [ -z $N ]; then
@@ -72,7 +61,7 @@ if [ -z $SLICEVCF ]; then
 	SLICEVCF=vcf_slice
 fi
 mkdir -p $SLICEVCF
-for POPNAME in $(yq eval '.Populations | keys' $POPYAML | perl -p -e 's/^\s*\-\s*//')
+for POPNAME in $(yq eval '.Populations | keys' $POPYAML | perl -p -e 's/^\s*\-\s*//' | grep TestFresh)
 do
 	FILES=$(yq eval '.Populations.'$POPNAME'[]' $POPYAML | perl -p -e "s/(\S+)/-V $GVCFFOLDER\/\$1.g.vcf.gz/g"  )
 	INTERVALS=$(cut -f1 $REFGENOME.fai  | sed -n "${NSTART},${NEND}p" | perl -p -e 's/(\S+)\n/--intervals $1 /g')
