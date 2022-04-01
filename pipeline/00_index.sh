@@ -1,7 +1,9 @@
 #!/usr/bin/bash
 #SBATCH -p short -n 4 -N 1 --mem 8gb
-module load samtools/1.14
+module load htslib
+module load samtools
 module load bwa/0.7.17
+module load java
 module load BBMap
 if [ -f config.txt ]; then
 	source config.txt

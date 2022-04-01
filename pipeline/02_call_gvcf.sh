@@ -1,9 +1,13 @@
 #!/usr/bin/bash
 #SBATCH -p batch,intel -N 1 -n 8 --mem 32gb --out logs/make_gvcf.%a.log --time 48:00:00
+#SBATCH --array=1-28
 
+module load htslib/1.14
+module load samtools/1.14
 module load picard
 module load java/13
 module load gatk/4
+module load perl/5.24.0
 module load bcftools
 
 MEM=32g

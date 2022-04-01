@@ -1,13 +1,18 @@
 #!/usr/bin/bash
-#SBATCH --mem 24G --nodes 1 --ntasks 2 -J slice.GVCFGeno --out logs/GVCFGenoGATK4.slice_%a.%A.log  -p intel,batch
+#SBATCH --mem 24G --nodes 1 --ntasks 2 -J slice.GVCFGeno --out logs/GVCFGenoGATK4.slice_%a.%A.log  -p intel
 #--time 48:00:00
+#SBATCH --array=1-28
 hostname
 MEM=24g
 module unload R
 module unload java
+module load java/8
+module load htslib/1.14
+module load samtools/1.14
 module load picard
-module load gatk/4
 module load java/13
+module load gatk/4
+module load perl/5.24.0
 module load bcftools
 module load parallel
 module load yq
@@ -61,7 +66,7 @@ if [ -z $SLICEVCF ]; then
 	SLICEVCF=vcf_slice
 fi
 mkdir -p $SLICEVCF
-for POPNAME in $(yq eval '.Populations | keys' $POPYAML | perl -p -e 's/^\s*\-\s*//' | grep TestFresh)
+for POPNAME in $(yq eval '.Populations | keys' $POPYAML | perl -p -e 's/^\s*\-\s*//' )
 do
 	FILES=$(yq eval '.Populations.'$POPNAME'[]' $POPYAML | perl -p -e "s/(\S+)/-V $GVCFFOLDER\/\$1.g.vcf.gz/g"  )
 	INTERVALS=$(cut -f1 $REFGENOME.fai  | sed -n "${NSTART},${NEND}p" | perl -p -e 's/(\S+)\n/--intervals $1 /g')
