@@ -1,4 +1,7 @@
 Populations:
+  TestFresh:
+    - BigSheepPass
+    - PinkhamCyn
 
   All:
     - BigSheepPass
