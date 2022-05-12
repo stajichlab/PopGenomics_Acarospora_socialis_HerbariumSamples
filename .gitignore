@@ -1,3 +1,10 @@
+*.idx
+*.csi
+*.RData
+*.Rhistory
+*.metrics
+slurm*
+*.log
 *~
 #*
 .#*
