@@ -5,6 +5,7 @@ module load workspace/scratch
 module load samtools
 module load jellyfish
 module load R
+
 GENOMESCOPE=genomescope
 if [ -f config.txt ]; then
   source config.txt

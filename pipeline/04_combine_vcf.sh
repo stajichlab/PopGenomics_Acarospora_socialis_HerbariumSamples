@@ -1,9 +1,7 @@
-#!/usr/bin/bash
-#SBATCH -p intel --mem 64gb -N 1 -n 4 --out logs/concat_vcf.log -p short
+#!/usr/bin/bash -l
+#SBATCH -p short --mem 64gb -N 1 -n 4 --out logs/concat_vcf.log
 
-module unload miniconda2
-module load miniconda3
-source activate cyvcf2
+module load cyvcf2
 module load bcftools
 module load yq
 

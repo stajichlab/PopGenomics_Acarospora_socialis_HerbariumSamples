@@ -1,15 +1,16 @@
-#!/usr/bin/bash
+#!/usr/bin/bash -l
+
 #SBATCH --mem=64G -p batch --nodes 1 --ntasks 8 --out logs/snpEff.log
-module unload miniconda2
-module load miniconda3
+
 module load snpEff
-module load bcftools/1.12
+module load bcftools
 module load tabix
 module load yq
 
 # THIS IS AN EXAMPLE OF HOW TO MAKE SNPEFF - it is for A.fumigatus
 SNPEFFGENOME=AfumigatusAf293_FungiDB_50
 GFFGENOME=$SNPEFFGENOME.gff
+
 CPU=$SLURM_CPUS_ON_NODE
 if [ -z $CPU ]; then
   CPU=1

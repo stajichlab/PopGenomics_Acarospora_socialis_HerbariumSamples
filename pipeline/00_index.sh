@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/usr/bin/bash -l
 #SBATCH -p short -n 4 -N 1 --mem 8gb
 module load htslib
 module load samtools

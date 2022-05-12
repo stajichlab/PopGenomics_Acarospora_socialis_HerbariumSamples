@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/usr/bin/bash -l
 #SBATCH -p intel -N 1 -n 4 --mem 32gb --out logs/make_gvcf.%a.log --time 72:00:00
 #SBATCH --array=1-28
 

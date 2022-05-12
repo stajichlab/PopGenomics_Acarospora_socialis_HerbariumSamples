@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -l
 #SBATCH -N 1 -n 16 --mem 32gb --out logs/bwa.%a.log --time 8:00:00 -p batch
 #SBATCH --array=1-28
 module load bwa
