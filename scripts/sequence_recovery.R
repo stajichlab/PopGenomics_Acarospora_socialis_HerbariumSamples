@@ -28,3 +28,7 @@ mosdepth <- mosdepth %>% left_join(mdfiles,by="source") %>% mutate(Length = End 
 
 sumcovtotal <- mosdepth %>% group_by(infiles) %>% summarize(covtotal=sum(Cov1),genomelen=sum(Length)) %>% mutate(coveragePct=covtotal/genomelen)
 write_tsv(sumcovtotal,"summary_recovery.tsv")
+
+p<-ggplot(data=sumcovtotal, aes(x=infiles, y=coveragePct)) +
+  geom_bar(stat="identity")
+p
