@@ -1,6 +1,6 @@
 #!/usr/bin/bash -l
 #SBATCH --mem 24G --nodes 1 --ntasks 2 -J slice.GVCFGeno --out logs/GVCFGenoGATK4.slice_%a.%A.log  -p intel
-#SBATCH --array=1-67
+#SBATCH --array=1-92
 hostname
 MEM=24g
 module unload R
@@ -29,8 +29,7 @@ if [ -f config.txt ]; then
 	source config.txt
 fi
 TEMPDIR=$SCRATCH
-if [ ! -f $REFGENOME ]; then
-    module load samtools/1.11
+if [ ! -f $REFGENOME.fai ]; then
     samtools faidx $REFGENOME
 fi
 NSTART=$(perl -e "printf('%d',1 + $GVCF_INTERVAL * ($N - 1))")
@@ -169,7 +168,3 @@ do
 	    tabix $SELECTINDEL.gz
 	fi
 done
-
-if [ -d $TEMPDIR ]; then
-	rmdir $TEMPDIR
-fi
