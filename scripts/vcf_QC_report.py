@@ -51,7 +51,7 @@ for chrom in variants.seqnames:
     chromstats[chrom] = stats.copy()
 
 hdr = variants.raw_header
-mtch = re.finditer(r'##contig=\<ID=([^,]+),length=(\d+)\>',hdr)
+mtch = re.finditer(r'##contig=\<ID=([^,]+),length=(\d+).*\>',hdr)
 for m in mtch:
     chrname = m.group(1)
     chrlen  = int(m.group(2))
@@ -92,7 +92,8 @@ allstats = stats.copy()
 
 csvout.writerow(['Chromosome','Length','Total Variants','VarPerKb',
                  'SNP','INDEL','Ts','Tv','Ts/Tv'])
-for chrom in sorted(chromstats):
+for chrom in sorted(chromstats,key=lambda x:chromstats[x]['Length'],reverse=True):
+    print("chrom is {}".format(chrom))
     cstats = chromstats[chrom]
     for t in cstats:
         if type(cstats[t]) is dict:
