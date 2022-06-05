@@ -41,7 +41,7 @@ iqtreerun() {
 	in=$1
 	out=$in.treefile
 	if [[ ! -f $out || $in -nt $out ]]; then
-		sbatch -p intel -n 6 -N 1 --mem 16gb -J iqtree --wrap "module load iqtree/2.2.0; iqtree2 -m GTR+ASC -s $in -nt AUTO -bb 1000 -alrt 1000"
+		sbatch -p intel -n 3 -N 1 --mem 16gb -J iqtree --wrap "module load iqtree/2.2.0; iqtree2 -m GTR+ASC -s $in -nt AUTO -bb 1000 -alrt 1000"
 	fi
 }
 
@@ -82,6 +82,5 @@ do
     fi
   done
 done
-exit
 parallel -j 2 fasttreerun ::: $(ls $TREEDIR/*.mfa)
 parallel -j 4 iqtreerun ::: $(ls $TREEDIR/*.mfa)
