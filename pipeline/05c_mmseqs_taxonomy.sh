@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash -l
 #SBATCH -p short -N 1 -n 64 --mem 128gb --out logs/unmapped_asm_mmseqs_classify.%a.log
 
 module load mmseqs2

@@ -1,4 +1,4 @@
-#!/usr/bin/bash -l
+#!/bin/bash -l
 #SBATCH -p short -N 1 -n 24 --mem 64gb --out logs/genomescope.%a.log -a 1-28
 
 module load workspace/scratch

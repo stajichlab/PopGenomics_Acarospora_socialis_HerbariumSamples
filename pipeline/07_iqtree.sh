@@ -1,4 +1,4 @@
-#!/usr/bin/bash -l
+#!/bin/bash -l
 #SBATCH -p intel -N 1 -n 8 --mem 16gb  --out logs/IQTREE2.log
 
 module load iqtree/2.2.0

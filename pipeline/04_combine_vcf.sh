@@ -1,4 +1,4 @@
-#!/usr/bin/bash -l
+#!/bin/bash -l
 #SBATCH -p short --mem 64gb -N 1 -n 4 --out logs/concat_vcf.log
 
 module load cyvcf2

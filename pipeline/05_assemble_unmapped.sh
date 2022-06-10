@@ -1,4 +1,4 @@
-#!/usr/bin/bash -l
+#!/bin/bash -l
 #SBATCH -p batch -N 1 -n 16 --mem 48gb --out logs/assemble_unmapped.%a_%A.log
 
 module load spades

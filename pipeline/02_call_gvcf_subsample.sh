@@ -1,4 +1,4 @@
-#!/usr/bin/bash -l
+#!/bin/bash -l
 #SBATCH -p intel -N 1 -n 4 --mem 32gb --out logs/make_gvcf_subsample.%a.log --time 72:00:00 -a 4
 
 module load htslib

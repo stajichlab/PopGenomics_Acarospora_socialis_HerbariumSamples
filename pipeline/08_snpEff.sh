@@ -1,4 +1,4 @@
-#!/usr/bin/bash -l
+#!/bin/bash -l
 
 #SBATCH --mem=64G -p batch --nodes 1 --ntasks 8 --out logs/snpEff.log
 

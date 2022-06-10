@@ -1,4 +1,4 @@
-#!/usr/bin/bash -l
+#!/bin/bash -l
 #SBATCH -p short -N 1 -n 96 --mem 384gb --out logs/mmseqs_classify_reads.%a.log -a 1-28
 
 module load workspace/scratch

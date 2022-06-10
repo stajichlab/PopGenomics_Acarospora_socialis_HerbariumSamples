@@ -1,4 +1,4 @@
-#!/usr/bin/bash -l
+#!/bin/bash -l
 #SBATCH -p short -N 1 -n 128 --mem 384gb --out logs/mmseqs_classify_unmappedreads.%a.log -a 1-28
 
 module load workspace/scratch

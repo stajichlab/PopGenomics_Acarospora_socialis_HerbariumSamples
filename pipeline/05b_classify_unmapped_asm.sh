@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash -l
 #SBATCH -p short -N 1 -n 8 --mem 32gb --out logs/unmapped_asm_classify.%a.log
 
 module load diamond
